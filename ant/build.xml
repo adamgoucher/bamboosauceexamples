@@ -6,7 +6,7 @@
   <property name="bin.dir" value="bin"/>
   <property name="lib.dir" value="lib"/>
   <property name="log.dir" value="logs"/>
-  <property name="config.dir" value="conf"/>
+  <property name="config.dir" value="config"/>
 
   <path id="classpath">
       <pathelement location="${bin.dir}" />
@@ -16,6 +16,8 @@
 
   <target name="clean">
     <delete dir="${bin.dir}"/>
+    <property name="myclasspath" refid="classpath"/>
+    <echo message="Classpath = ${myclasspath}"/>
   </target>
 
   <target name="compile" depends="clean">
