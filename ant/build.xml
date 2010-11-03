@@ -1,0 +1,40 @@
+<project name="bamboosauceexamples" default="junit">
+  <description>Bamboo Sauce Examples - Ant</description>
+
+  <property environment="env" />
+  <property name="src.dir" value="src"/>
+  <property name="bin.dir" value="bin"/>
+  <property name="lib.dir" value="lib"/>
+  <property name="log.dir" value="logs"/>
+
+  <path id="classpath">
+      <pathelement location="${bin.dir}" />
+      <fileset dir="${lib.dir}" includes="**/*.jar"/>
+  </path>
+
+  <target name="clean">
+    <delete dir="${bin.dir}"/>
+  </target>
+
+  <target name="compile" depends="clean">
+    <mkdir dir="${bin.dir}"/>
+    <javac srcdir="${src.dir}" includes="**/**" destdir="${bin.dir}" classpathref="classpath">
+      <compilerarg value="-Xlint:unchecked" />
+    </javac>
+  </target>
+
+  <target name="junit" depends="compile">
+    <mkdir dir="${log.dir}"/>
+    <junit printsummary="withOutAndErr" fork="yes">
+      <sysproperty key="bamboo.SELENIUM_HOST" value="${env.SELENIUM_HOST}" />
+      <sysproperty key="bamboo.SELENIUM_PORT" value="${env.SELENIUM_PORT}" />
+      <sysproperty key="bamboo.SELENIUM_BROWSER" value="${env.SELENIUM_BROWSER}" />
+
+      <classpath refid="classpath" />
+      <formatter type="xml" />
+      <batchtest todir="${log.dir}">
+        <fileset dir="${bin.dir}" includes="**/*.class" />
+      </batchtest>
+    </junit>    
+  </target>
+</project>
