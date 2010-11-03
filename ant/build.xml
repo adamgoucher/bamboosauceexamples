@@ -11,6 +11,7 @@
   <path id="classpath">
       <pathelement location="${bin.dir}" />
       <fileset dir="${lib.dir}" includes="**/*.jar"/>
+      <pathelement location="${config.dir}" />
   </path>
 
   <target name="clean">
