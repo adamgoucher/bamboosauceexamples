@@ -6,6 +6,7 @@
   <property name="bin.dir" value="bin"/>
   <property name="lib.dir" value="lib"/>
   <property name="log.dir" value="logs"/>
+  <property name="config.dir" value="conf"/>
 
   <path id="classpath">
       <pathelement location="${bin.dir}" />
